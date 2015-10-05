@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree", "BinaryTree\BinaryTree.csproj", "{366E50E7-1CB9-418D-9E03-0F35A0012739}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{366E50E7-1CB9-418D-9E03-0F35A0012739}.Debug|x86.ActiveCfg = Debug|x86
+		{366E50E7-1CB9-418D-9E03-0F35A0012739}.Debug|x86.Build.0 = Debug|x86
+		{366E50E7-1CB9-418D-9E03-0F35A0012739}.Release|x86.ActiveCfg = Release|x86
+		{366E50E7-1CB9-418D-9E03-0F35A0012739}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal
