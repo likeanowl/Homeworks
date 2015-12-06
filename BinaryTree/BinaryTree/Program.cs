@@ -6,8 +6,8 @@ namespace BinaryTree
 	{
 		public static void Main (string[] args)
 		{
-			BinaryTree<int> binTree = InputParse.ParseFileData ("input.txt");
-			Console.WriteLine (binTree.BFSIterator ());
+			BinaryTree<int> binTree = InputParse.ParseFileData("input.txt");
+			Console.WriteLine (binTree.BFSIterator());
 		}
 	}
 }

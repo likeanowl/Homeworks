@@ -2,6 +2,9 @@
 
 namespace BinaryTree
 {
+	/// <summary>
+	/// Node.
+	/// </summary>
 	public class Node<T> where T:IComparable
 	{
 		public Node()

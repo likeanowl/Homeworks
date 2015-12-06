@@ -4,131 +4,218 @@ using System.Linq;
 
 namespace BinaryTree
 {
+	/// <summary>
+	/// Binary tree.
+	/// </summary>
 	public class BinaryTree<T> where T: IComparable
 	{
+		/// <summary>
+		/// Node.
+		/// </summary>
+		private class Node<T>
+		{
+			public Node()
+			{
+				this.lNode = null;
+				this.rNode = null;
+				this.value = default(T);
+			}
+
+			public Node(T value)
+			{
+				this.value = value;
+			}
+			public Node<T> lNode;
+			public Node<T> rNode;
+			public T value;
+		}
+
 		public BinaryTree ()
 		{
-			Root = null;
+			root = null;
 		}
 
-		public BinaryTree (Node<T> node)
+		private BinaryTree (Node<T> node)
 		{
-			Root = node;
+			root = node;
 		}
 
+		public BinaryTree (T value)
+		{
+			root = new Node<T>(value);
+		}
+
+		/// <summary>
+		/// Determines whether this instance is empty.
+		/// </summary>
+		/// <returns><c>true</c> if this instance is empty; otherwise, <c>false</c>.</returns>
 		public bool IsEmpty()
 		{
-			return Root == null;
+			return root == null;
 		}
 
+		/// <summary>
+		/// Gets the root value.
+		/// </summary>
+		/// <returns>The root value.</returns>
+		public T GetRootValue()
+		{
+			T value = root.value;
+			return value;
+		}
+
+		/// <summary>
+		/// Clone this instance.
+		/// </summary>
+		public BinaryTree<T> Clone()
+		{
+			BinaryTree<T> newTree = new BinaryTree<T>();
+			Clone(newTree);
+			return newTree;
+		}
+
+		private void Clone(BinaryTree<T> newTree)
+		{
+			newTree.Add(this.GetRootValue());
+			if (this.root.rNode != null)
+				this.GetRTree().Clone();
+			if (this.root.lNode != null)
+			this.GetLTree().Clone();
+		}
+
+		/// <summary>
+		/// Add the specified value.
+		/// </summary>
+		/// <param name="value">value.</param>
 		public void Add(T value)
 		{
-			Add (ref Root, value);
+			Add(ref root, value);
 		}
 
-		private static void Add(ref Node<T> Root, T value)
+		private static void Add(ref Node<T> root, T value)
 		{
-			if (Root == null)
-				Root = new Node<T> (value);
-			else if (value.CompareTo(Root.Value) < 0)
-				Add (ref Root.LNode, value);
-			else if (value.CompareTo(Root.Value) > 0)
-				Add (ref Root.RNode, value);
+			if (root == null)
+				root = new Node<T> (value);
+			else if (value.CompareTo(root.value) < 0)
+				Add(ref root.lNode, value);
+			else if (value.CompareTo(root.value) > 0)
+				Add(ref root.rNode, value);
 		}
 
-		public BinaryTree<T> GetLTree ()
+		/// <summary>
+		/// Gets the left tree.
+		/// </summary>
+		/// <returns>The L tree.</returns>
+		public BinaryTree<T> GetLTree()
 		{
-			return new BinaryTree<T> (Root.LNode);
+			return new BinaryTree<T>(root.lNode);
 		}
 
-		public BinaryTree<T> GetRTree ()
+		/// <summary>
+		/// Gets the right tree.
+		/// </summary>
+		/// <returns>The R tree.</returns>
+		public BinaryTree<T> GetRTree()
 		{
-			return new BinaryTree<T> (Root.RNode);
+			return new BinaryTree<T>(root.rNode);
 		}
 
-		public Node<T> GetMinNode()
+		/// <summary>
+		/// Gets the minimum node in right subtree.
+		/// </summary>
+		/// <returns>The minimum node.</returns>
+		private Node<T> GetMinNode()
 		{
-			return GetMinNode (this.Root.RNode);
+			return GetMinNode(this.root.rNode);
 		}
 		private Node<T> GetMinNode(Node<T> node)
 		{
 			if (node == null)
 				return null; 
-			if (node.LNode == null) 
+			if (node.lNode == null) 
 				return node; 
-			return GetMinNode(node.LNode);
+			return GetMinNode(node.lNode);
 		}
 			
+		/// <summary>
+		/// Delete the specified value.
+		/// </summary>
+		/// <param name="value">value.</param>
 		public void Delete(T value)
 		{
-			if (value.CompareTo (Root.Value) > 0)
+			if (value.CompareTo(root.value) > 0)
 			{
-				BinaryTree<T> rTree = GetRTree ();
-				rTree.Delete (value);
-				Root.RNode = rTree.Root;
+				BinaryTree<T> rTree = GetRTree();
+				rTree.Delete(value);
+				root.rNode = rTree.root;
 			}
-			else if (value.CompareTo (Root.Value) < 0)
+			else if (value.CompareTo(root.value) < 0)
 			{
-				BinaryTree<T> lTree = GetLTree ();
-				lTree.Delete (value);
-				Root.LNode = lTree.Root;
+				BinaryTree<T> lTree = GetLTree();
+				lTree.Delete(value);
+				root.lNode = lTree.root;
 			}
 			else
 			{
-				if (Root.LNode != null && Root.RNode != null)
+				if (root.lNode != null && root.rNode != null)
 				{
-					Root.Value = GetMinNode ().Value;
-					BinaryTree<T> rTree = GetRTree ();
-					rTree.Delete (Root.Value);
-					Root.RNode = rTree.Root;
+					root.value = GetMinNode().value;
+					BinaryTree<T> rTree = GetRTree();
+					rTree.Delete(root.value);
+					root.rNode = rTree.root;
 				}
-				else if (Root.RNode != null)
+				else if (root.rNode != null)
 				{
-					Root = Root.RNode;
+					root = root.rNode;
 				}
-				else if (Root.LNode != null)
-					Root = Root.LNode;
+				else if (root.lNode != null)
+					root = root.lNode;
 				else
-					Root = null;
+					root = null;
 			}
 		}
-
+			
 		public string BFSIterator()
 		{
 			string outputString = "";
 			var queue = new Queue<Node<T>>();
-			queue.Enqueue(Root); 
-			while (queue.Count!=0)
+			queue.Enqueue(root); 
+			while(queue.Count!=0)
 			{    
-				if (queue.Peek().LNode != null)
-					queue.Enqueue(queue.Peek().LNode);
-				if (queue.Peek().RNode != null)
-					queue.Enqueue(queue.Peek().RNode);
+				if (queue.Peek().lNode != null)
+					queue.Enqueue(queue.Peek().lNode);
+				if (queue.Peek().rNode != null)
+					queue.Enqueue(queue.Peek().rNode);
 				if (queue.Count > 1)
-					outputString += queue.Dequeue ().Value.ToString () + " ";
+					outputString += queue.Dequeue().value.ToString() + " ";
 				else
-					outputString += queue.Dequeue ().Value.ToString ();
+					outputString += queue.Dequeue().value.ToString();
 			}
 			return outputString;
 		} 
 
-		public bool IsExist(T value)
+		/// <summary>
+		/// Checking is value contains in tree
+		/// </summary>
+		/// <returns><c>true</c> if  this instance is value in tree the specif ied value; otherwise, <c>false</c>.</returns>
+		/// <param name="value">value.</param>
+		public bool IsValueInTree(T value)
 		{
-			if (Root == null)
+			if (root == null)
 				return false;
 			else 
 			{
-				if (value.CompareTo (Root.Value) > 0)
-					GetLTree ().IsExist (value);
-				else if (value.CompareTo (Root.Value) < 0)
-					GetRTree ().IsExist (value);
+				if  (value.CompareTo(root.value) > 0)
+					GetLTree().IsValueInTree(value);
+				else if  (value.CompareTo(root.value) < 0)
+					GetRTree().IsValueInTree(value);
 				else
 					return true;
 			}
 			return false;
 		}
 
-		public Node<T> Root;
+		private Node<T> root;
 	}
 }
 
