@@ -5,89 +5,109 @@ using System.Linq;
 
 namespace LocalNetwork
 {
-	/*implements local network */
+	/// <summary>
+	/// Local network.
+	/// </summary>
 	public class LocalNetwork 
 	{
 		RandomSingleton random = RandomSingleton.Instance();
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="LocalNetwork.LocalNetwork"/> class.
+		/// </summary>
 		public LocalNetwork()
 		{
-			this._AdjacencyList = new Dictionary<Computer, IList<Computer>> (
+			this.adjacencyList = new Dictionary<Computer, IList<Computer>> (
 				new ComputerComparer());
 		}
 
-		public LocalNetwork(Dictionary<int, IList<int>> AdjacencyMatrix,
+		/// <summary>
+		/// Initializes a new instance of the <see cref="LocalNetwork.LocalNetwork"/> class.
+		/// </summary>
+		/// <param name="adjacencyMatrix">Adjacency matrix.</param>
+		/// <param name="pcDescriptions">Pc descriptions.</param>
+		public LocalNetwork(Dictionary<int, IList<int>> adjacencyMatrix,
 			Dictionary<int,IList<string>> pcDescriptions)
 		{
-			this._AdjacencyList = new Dictionary<Computer, IList<Computer>> (
-				AdjacencyMatrix.Keys.Count, new ComputerComparer());
-			for (int i = 0; i < AdjacencyMatrix.Count; i++) 
+			this.adjacencyList = new Dictionary<Computer, IList<Computer>> (
+				adjacencyMatrix.Keys.Count, new ComputerComparer());
+			for (int i = 0; i < adjacencyMatrix.Count; i++) 
 			{
-				Computer currentComp = new Computer(int.Parse(pcDescriptions [i][0]),
-					pcDescriptions [i][1],
-					pcDescriptions [i][2],
-					double.Parse(pcDescriptions [i][3]));
-				IList<int> bufferList = AdjacencyMatrix [i];
-				IList<Computer> compList = new List<Computer> ();
-				for (int j = 0; j < AdjacencyMatrix [i].Count; j++) 
+				Computer currentComp = new Computer(int.Parse(pcDescriptions[i][0]),
+					pcDescriptions[i][1],
+					pcDescriptions[i][2],
+					double.Parse(pcDescriptions[i][3]));
+				IList<int> bufferList = adjacencyMatrix[i];
+				IList<Computer> compList = new List<Computer>();
+				for (int j = 0; j < adjacencyMatrix [i].Count; j++) 
 				{
-					Computer computer = new Computer (int.Parse(pcDescriptions [bufferList[j]][0]),
-						pcDescriptions [bufferList[j]][1],
-						pcDescriptions [bufferList[j]][2],
-						double.Parse(pcDescriptions [bufferList[j]][3]));
-					compList.Add (computer);
+					Computer computer = new Computer(int.Parse(pcDescriptions[bufferList[j]][0]),
+						pcDescriptions[bufferList[j]][1],
+						pcDescriptions[bufferList[j]][2],
+						double.Parse(pcDescriptions[bufferList[j]][3]));
+					compList.Add(computer);
 				}
-				this._AdjacencyList.Add (currentComp, compList);
+				this.adjacencyList.Add(currentComp, compList);
 			}
 		}
 
-		public LocalNetwork Step ()
+		/// <summary>
+		/// Makes one step in our system in which each computer
+		/// adjacent with infected can be infected with random chance.
+		/// </summary>
+		public LocalNetwork Step()
 		{
-			/*thought to use bfs at beginning, but finally decided to
-			 * use "kostil'" instead*/
-			IList<Computer> infectedComputers = new List<Computer> ();
-			foreach (Computer computer in _AdjacencyList.Keys) 
+			IList<Computer> infectedComputers = new List<Computer>();
+			foreach (Computer computer in adjacencyList.Keys) 
 			{
-				if (computer.IsInfected == "infected") 
-					infectedComputers.Add (computer);
+				if (computer.isInfected) 
+					infectedComputers.Add(computer);
 			}
 			foreach (Computer computer in infectedComputers) 
 			{
-					foreach (Computer compInList in _AdjacencyList[computer]) 
+					foreach (Computer compInList in adjacencyList[computer]) 
 					{
-						if (compInList.IsInfected == "healthy")
-							this._AdjacencyList.Keys.ToList ().Find (((Computer t) => 
-								t.ComputerId == compInList.ComputerId)).Contamination (
+						if (!compInList.isInfected)
+							this.adjacencyList.Keys.ToList().Find(((Computer t) => 
+								t.computerID == compInList.computerID)).Contamination(
 									(double)random.Next (101) / 100.0);
 					}
 			}
 			return this;
 		}
 
+		/// <summary>
+		/// Gets the information about network state.
+		/// </summary>
+		/// <param name="stepNumber">Step number.</param>
 		public void GetInformation(int stepNumber)
 		{
-			Console.WriteLine ("Network status after step # {0} : ", stepNumber);
-			foreach (Computer i in this._AdjacencyList.Keys) 
+			Console.WriteLine("Network status after step # {0} : ", stepNumber);
+			foreach (Computer i in this.adjacencyList.Keys) 
 			{
-				Console.WriteLine ("Computer with ID {0} is {1} now", 
-					i.ComputerId, 
-					i.IsInfected);
+				Console.WriteLine("Computer with ID {0} is {1} now", 
+					i.computerID, 
+					i.isInfected);
 			}
 		}
 
+		/// <summary>
+		/// Checking is health computer exist.
+		/// </summary>
+		/// <returns><c>true</c> if this instance is not infected exist; otherwise, <c>false</c>.</returns>
 		public bool IsNotInfectedExist()
 		{
-			foreach (Computer i in _AdjacencyList.Keys) 
+			foreach (Computer i in adjacencyList.Keys) 
 			{
-				if (i.IsInfected == "healthy" && _AdjacencyList[i].Any())
+				if (i.isInfected == "healthy" && adjacencyList[i].Any())
 					return true;
 			}
 			return false;
 		}
 
-		public int Count { get { return _AdjacencyList.Keys.Count; } }
-		public List<Computer> Keys {get { return _AdjacencyList.Keys.ToList(); } }
-		private Dictionary<Computer,IList<Computer>> _AdjacencyList;
+		public int count { get { return adjacencyList.Keys.Count; } }
+		public List<Computer> keys {get { return adjacencyList.Keys.ToList(); } }
+		private Dictionary<Computer,IList<Computer>> adjacencyList;
 	}
 }
 

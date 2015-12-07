@@ -9,36 +9,45 @@ namespace LocalNetwork
 	public class Tests
 	{
 
+		/// <summary>
+		/// Contaminates the computer.
+		/// </summary>
 		[Test]
-		public void Contaminate_Computer()
+		public void Contaminate_Computer_test()
 		{
 			double chance = 0.5;
 			double pseudorandom = random.Next(101)/100.0;
 			if (pseudorandom >= 0.5) {
-				string expected = "healthy";
-				Computer testComp = new Computer (1, "test os", "healthy", chance);
-				testComp.Contamination (pseudorandom);
-				string actual = testComp.IsInfected;
-				Assert.AreEqual (expected, actual, "Contamination is not correct");
-			} else {
-				string expected = "infected";
-				Computer testComp = new Computer (1, "test os", "healthy", chance);
-				testComp.Contamination (pseudorandom);
-				string actual = testComp.IsInfected;
-				Assert.AreEqual (expected, actual, "Contamination is not working correct");
+				string expected = "False";
+				Computer testComp = new Computer(1, "test os", "healthy", chance);
+				testComp.Contamination(pseudorandom);
+				string actual = testComp.isInfected;
+				Assert.AreEqual(expected, actual, "Contamination is not correct");
+			} 
+			else 
+			{
+				string expected = "True";
+				Computer testComp = new Computer(1, "test os", "healthy", chance);
+				testComp.Contamination(pseudorandom);
+				string actual = testComp.isInfected;
+				Assert.AreEqual(expected, actual, "Contamination is not working correct");
 			}
 
 		}
 
+		/// <summary>
+		/// Changeses the after step.
+		/// </summary>
 		[Test]
-		public void Changes_After_Step()
+		public void Changes_After_Step_test()
 		{
-			LocalNetwork testLAN = ParseInputData.ParseData ("step_test.txt");
-			LocalNetwork exceptedLAN = ParseInputData.ParseData ("expected_lan_after_step_test.txt");
-			LocalNetwork actual = testLAN.Step ();
+			LocalNetwork testLAN = ParseInputData.ParseData("step_test.txt");
+			LocalNetwork exceptedLAN = ParseInputData.ParseData("expected_lan_after_step_test.txt");
+			LocalNetwork actual = testLAN.Step();
 			for (int i = 0; i<actual.Count; i++)
 			{
-				Assert.AreEqual (actual.Keys[i].IsInfected, exceptedLAN.Keys[i].IsInfected);
+				Assert.AreEqual(actual.keys[i].isInfected.ToString(), 
+					exceptedLAN.keys[i].isInfected.ToString());
 			}
 		}
 

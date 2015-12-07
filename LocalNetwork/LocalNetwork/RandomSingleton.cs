@@ -4,14 +4,18 @@ namespace LocalNetwork
 {
 	public class RandomSingleton : Random
 	{
-		/*singleton pattern for Random */
-		static RandomSingleton _Instance;
+		/// <summary>
+		///singleton pattern for Random
+		/// </summary>
+		static RandomSingleton instance;
 
 		public static RandomSingleton Instance()
 		{ 
-			if (_Instance == null)	_Instance = new RandomSingleton();
-			return _Instance;
+			if (instance == null)	
+				instance = new RandomSingleton();
+			return instance;
 		}
+
 		private RandomSingleton() {} 
 	}
 }

@@ -7,11 +7,11 @@ namespace LocalNetwork
 {
 	class MainClass
 	{
-		public static void Main (string[] args)
+		public static void Main(string[] args)
 		{
 			/*example for input file in LocalNetwork/bin/Debug*/
 			LocalNetwork lan = ParseInputData.ParseData("input.txt");
-			lan.GetInformation (0);
+			lan.GetInformation(0);
 			int step = 0;
 			while (lan.IsNotInfectedExist()) 
 			{

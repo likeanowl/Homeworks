@@ -2,37 +2,54 @@
 
 namespace LocalNetwork
 {
+	/// <summary>
+	/// Computer.
+	/// </summary>
 	public class Computer
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="LocalNetwork.Computer"/> class.
+		/// </summary>
 		/*implements single computer in LN, like node in graph */
 		public Computer()
 		{
-			this.IsInfected = "healthy";
-			this.OsVersion = "";
-			this.ChanceToBeInfected = 0.0;
-			this.ComputerId = 0;
+			this.isInfected = false;
+			this.osVersion = "";
+			this.chanceToBeInfected = 0.0;
+			this.computerID = 0;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="LocalNetwork.Computer"/> class.
+		/// </summary>
+		/// <param name="computerId">Computer identifier.</param>
+		/// <param name="osVersion">Os version.</param>
+		/// <param name="isInfected">Is infected.</param>
+		/// <param name="chanceToBeInfected">Chance to be infected.</param>
 		public Computer(int computerId, string osVersion, string isInfected, double chanceToBeInfected)
 		{
-			this.ComputerId = computerId;
-			this.IsInfected = isInfected;
-			this.OsVersion = osVersion;
-			this.ChanceToBeInfected = chanceToBeInfected;
+			this.computerID = computerID;
+			this.isInfected = isInfected;
+			this.osVersion = osVersion;
+			this.chanceToBeInfected = chanceToBeInfected;
 		}
 
-		public void Contamination (double random)
+		/// <summary>
+		/// Contaminate computer with random chance.
+		/// </summary>
+		/// <param name="random">Random.</param>
+		public void Contamination(double random)
 		{
-			if (this.ChanceToBeInfected >= random) 
+			if (this.chanceToBeInfected >= random) 
 			{
-				this.IsInfected = "infected";
+				this.isInfected = true;
 			}
 		}
 
-		public string IsInfected { get; set; }
-		public string OsVersion { get; set; }
-		public double ChanceToBeInfected { get; set; }
-		public int ComputerId { get; set; }
+		public bool isInfected { get; set; }
+		public string osVersion { get; set; }
+		public double chanceToBeInfected { get; set; }
+		public int computerID { get; set; }
 	}
 }
 

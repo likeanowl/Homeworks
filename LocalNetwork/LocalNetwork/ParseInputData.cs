@@ -7,7 +7,11 @@ namespace LocalNetwork
 {
 	public static class ParseInputData
 	{
-		//reads file and parses it into data we need to create local network
+		/// <summary>
+		/// Reads file and parses it into data we need to create local network
+		/// </summary>
+		/// <returns>The data.</returns>
+		/// <param name="filename">Filename.</param>
 		public static LocalNetwork ParseData(string filename)
 		{
 			StreamReader file = new StreamReader (filename);
