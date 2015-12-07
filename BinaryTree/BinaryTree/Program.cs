@@ -10,7 +10,7 @@ namespace BinaryTree
 			testTree.Add(1);
 			testTree.Add(2);
 			testTree.Add(0);
-			testTree.Add(-1);
+			testTree.Add(4);
 			BinaryTree<int> clonedTree = new BinaryTree<int>();
 			clonedTree = testTree.Clone();
 			string output = "";
