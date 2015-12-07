@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace BinaryTree
 {
@@ -10,11 +12,45 @@ namespace BinaryTree
 	{
 		public BinaryTreeEnum(BinaryTree<T> binaryTree)
 		{
-			binTree = new BinaryTree<T>();
-			binTree = binaryTree.Clone();
+			treeEnum = new List<T>();
+			treeEnum = binaryTree.ConvertToArray();
 		}
 
-		public BinaryTree<T> binTree;
+		public bool MoveNext()
+		{
+			position++;
+			return (position < treeEnum.Count);
+		}
+
+		public void Reset()
+		{
+			position = -1;
+		}
+
+		object IEnumerator.Current
+		{
+			get
+			{
+				return Current;
+			}
+		}
+
+		public T Current
+		{
+			get
+			{
+				try 
+				{
+					return treeEnum[position];
+				}
+				catch (IndexOutOfRangeException)
+				{
+					throw new InvalidOperationException();
+				}
+			}
+		}
+
+		public IList<T> treeEnum;
 		public int position = -1;
 	}
 }

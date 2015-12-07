@@ -78,9 +78,9 @@ namespace BinaryTree
 		{
 			newTree.Add(this.GetRootValue());
 			if (this.root.rNode != null)
-				this.GetRTree().Clone();
+				this.GetRTree().Clone(newTree);
 			if (this.root.lNode != null)
-			this.GetLTree().Clone();
+				this.GetLTree().Clone(newTree);
 		}
 
 		/// <summary>
@@ -175,9 +175,9 @@ namespace BinaryTree
 			}
 		}
 			
-		public string BFSIterator()
+		public List<T> ConvertToArray()
 		{
-			string outputString = "";
+			List<T> outputList = new List<T>();
 			var queue = new Queue<Node<T>>();
 			queue.Enqueue(root); 
 			while(queue.Count!=0)
@@ -186,12 +186,9 @@ namespace BinaryTree
 					queue.Enqueue(queue.Peek().lNode);
 				if (queue.Peek().rNode != null)
 					queue.Enqueue(queue.Peek().rNode);
-				if (queue.Count > 1)
-					outputString += queue.Dequeue().value.ToString() + " ";
-				else
-					outputString += queue.Dequeue().value.ToString();
+				outputList.Add(queue.Dequeue().value);
 			}
-			return outputString;
+			return outputList;
 		} 
 
 		/// <summary>

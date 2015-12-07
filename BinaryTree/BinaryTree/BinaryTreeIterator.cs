@@ -14,6 +14,16 @@ namespace BinaryTree
 			binTree = binaryTree.Clone();
 		}
 
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return (IEnumerator) GetEnumerator();
+		}
+
+		public BinaryTreeEnum<T> GetEnumerator()
+		{
+			return new BinaryTreeEnum<T>(binTree);
+		}
+
 		public BinaryTree<T> binTree;
 	}
 }
