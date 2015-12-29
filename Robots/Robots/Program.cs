@@ -12,11 +12,6 @@ namespace Robots
 		{
 			RobotsGraph graph = InputParse.CreateObjectFromFile("FindCompTestFile.txt", 
 				"RobotsLocations.txt");
-			Console.WriteLine(graph.FindOddCycle().ToString());
-			/*if (graph.IsSequenceExist ())
-				Console.WriteLine ("Exist");
-			else
-				Console.WriteLine ("Doesn't exist");*/
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace BinaryTree
 		/// BFS iterator test.
 		/// </summary>
 		[Test]
-		public void ConvertToArray_test()
+		public void ConvertToString_test1()
 		{
 			BinaryTree<int> binTree = new BinaryTree<int>();
 			binTree.Add(3);
@@ -20,12 +20,18 @@ namespace BinaryTree
 			binTree.Add(-1);
 			binTree.Add(-3);
 			binTree.Add(11);
-			string actual = "";
-			for (int i = 0; i < binTree.ConvertToArray().Count; i++)
-			{
-				actual += binTree.ConvertToArray()[i].ToString() + " ";
-			}
+			string actual = binTree.ConvertToString();
 			string excepted = "3 0 6 -5 11 -1 -3 ";
+			Assert.AreEqual(excepted, actual);
+		}
+
+		[Test]
+		public void ConvertToString_test2()
+		{
+			BinaryTree<int> binTree = new BinaryTree<int>();
+			binTree.Add(11);
+			string actual = binTree.ConvertToString();
+			string excepted = "11 ";
 			Assert.AreEqual(excepted, actual);
 		}
 
@@ -33,21 +39,24 @@ namespace BinaryTree
 		/// Add method test.
 		/// </summary>
 		[Test]
-		public void AddMethod_test()
+		public void AddMethod_test1()
 		{
 			BinaryTree<int> binTree = new BinaryTree<int>();
 			binTree.Add(3);
-			BinaryTree<int> binTree2 = new BinaryTree<int>(3);
-			string excepted = "";
-			string actual = "";
-			for (int i = 0; i < binTree2.ConvertToArray().Count; i++)
-			{
-				excepted += binTree2.ConvertToArray()[i].ToString() + " ";
-			}
-			for (int i = 0; i < binTree.ConvertToArray().Count; i++)
-			{
-				actual += binTree.ConvertToArray()[i].ToString() + " ";
-			}
+			string excepted = binTree.ConvertToString();
+			string actual = "3 ";
+			Assert.AreEqual(excepted, actual);
+		}
+
+		[Test]
+		public void AddMethod_test2()
+		{
+			BinaryTree<int> binTree = new BinaryTree<int>();
+			binTree.Add(3);
+			binTree.Add(4);
+			binTree.Add(2);
+			string excepted = binTree.ConvertToString();
+			string actual = "3 2 4 ";
 			Assert.AreEqual(excepted, actual);
 		}
 
@@ -55,7 +64,7 @@ namespace BinaryTree
 		/// Remove method test.
 		/// </summary>
 		[Test]
-		public void RemoveMethod_test()
+		public void RemoveMethod_test1()
 		{
 			BinaryTree<int> binTree = new BinaryTree<int>();
 			binTree.Add(3);
@@ -64,29 +73,21 @@ namespace BinaryTree
 			binTree.Add(6);
 			binTree.Delete(3);
 			string excepted = "6 0 -5 ";
-			string actual = "";
-			for (int i = 0; i < binTree.ConvertToArray().Count; i++)
-			{
-				actual += binTree.ConvertToArray()[i].ToString() + " ";
-			}
+			string actual = binTree.ConvertToString();
 			Assert.AreEqual(excepted, actual);
 		}
 
 		[Test]
-		public void Iterator_test()
+		public void RemoveMethod_test2()
 		{
 			BinaryTree<int> binTree = new BinaryTree<int>();
+			binTree.Add(4);
+			binTree.Add(12);
 			binTree.Add(3);
-			binTree.Add(0);
-			binTree.Add(-5);
-			binTree.Add(6);
-			string actual = "";
-			string excepted = "3 0 6 -5 ";
-			BinaryTreeIterator<int> iterator = new BinaryTreeIterator<int>(binTree);
-			foreach (int value in iterator)
-			{
-				actual += value.ToString() + " ";
-			}
+			binTree.Delete(3);
+			binTree.Delete(4);
+			string excepted = "12 ";
+			string actual = binTree.ConvertToString();
 			Assert.AreEqual(excepted, actual);
 		}
 	}

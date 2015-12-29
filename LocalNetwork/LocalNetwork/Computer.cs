@@ -26,7 +26,7 @@ namespace LocalNetwork
 		/// <param name="osVersion">Os version.</param>
 		/// <param name="isInfected">Is infected.</param>
 		/// <param name="chanceToBeInfected">Chance to be infected.</param>
-		public Computer(int computerId, string osVersion, string isInfected, double chanceToBeInfected)
+		public Computer(int computerId, string osVersion, bool isInfected, double chanceToBeInfected)
 		{
 			this.computerID = computerID;
 			this.isInfected = isInfected;

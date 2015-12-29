@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <configuration>
+    <images-root-path>..</images-root-path>
+    <target-gtk-version>2.12</target-gtk-version>
+  </configuration>
+  <import>
+    <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="../bin/Debug/GraphicsEditor.exe" internal="true" />
+  </import>
+  <widget class="Gtk.Window" id="MainWindow" design-size="625 472">
+    <action-group name="Default">
+      <action id="undoBtn">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-go-back</property>
+      </action>
+      <action id="redoBtn">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-go-forward</property>
+      </action>
+      <action id="deleteBtn">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-close</property>
+      </action>
+      <action id="drawBtn">
+        <property name="Type">Toggle</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-edit</property>
+        <property name="DrawAsRadio">False</property>
+        <property name="Active">False</property>
+      </action>
+      <action id="moveBtn">
+        <property name="Type">Toggle</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-index</property>
+        <property name="DrawAsRadio">False</property>
+        <property name="Active">False</property>
+      </action>
+    </action-group>
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">GraphicsEditor</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Resizable">False</property>
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <child>
+      <widget class="Gtk.Fixed" id="fixed1">
+        <property name="MemberName" />
+        <property name="HasWindow">False</property>
+        <child>
+          <widget class="Gtk.Toolbar" id="editorToolbar">
+            <property name="MemberName" />
+            <property name="ShowArrow">False</property>
+            <node name="editorToolbar" type="Toolbar">
+              <node type="Toolitem" action="undoBtn" />
+              <node type="Toolitem" action="redoBtn" />
+              <node type="Toolitem" action="deleteBtn" />
+              <node type="Toolitem" action="drawBtn" />
+              <node type="Toolitem" action="moveBtn" />
+            </node>
+          </widget>
+          <packing>
+            <property name="X">4</property>
+            <property name="Y">4</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.DrawingArea" id="drawingarea1">
+            <property name="MemberName" />
+            <property name="WidthRequest">600</property>
+            <property name="HeightRequest">400</property>
+          </widget>
+          <packing>
+            <property name="X">12</property>
+            <property name="Y">58</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</stetic-interface>

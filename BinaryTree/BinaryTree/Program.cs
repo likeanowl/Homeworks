@@ -13,12 +13,8 @@ namespace BinaryTree
 			testTree.Add(4);
 			BinaryTree<int> clonedTree = new BinaryTree<int>();
 			clonedTree = testTree.Clone();
-			string output = "";
-			for (int i = 0; i < clonedTree.ConvertToArray().Count; i++)
-			{
-				output += clonedTree.ConvertToArray()[i].ToString() + " ";
-			}
-			Console.WriteLine(output);
+			Console.WriteLine(clonedTree.ConvertToString());
+			Console.WriteLine(testTree.ConvertToString());
 		}
 	}
 }

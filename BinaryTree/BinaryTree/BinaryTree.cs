@@ -1,48 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 namespace BinaryTree
 {
 	/// <summary>
 	/// Binary tree.
 	/// </summary>
-	public class BinaryTree<T> where T: IComparable
+	public class BinaryTree<T> : IEnumerable<T> where T: IComparable
 	{
 		/// <summary>
 		/// Node.
 		/// </summary>
-		private class Node<T>
+		private class Node
 		{
 			public Node()
 			{
 				this.lNode = null;
 				this.rNode = null;
-				this.value = default(T);
+				this.nodeValue = default(T);
 			}
 
-			public Node(T value)
+			public Node(T nodeValue)
 			{
-				this.value = value;
+				this.nodeValue = nodeValue;
 			}
-			public Node<T> lNode;
-			public Node<T> rNode;
-			public T value;
+
+			public Node lNode;
+			public Node rNode;
+			public T nodeValue;
 		}
 
-		public BinaryTree ()
+		public BinaryTree()
 		{
 			root = null;
 		}
 
-		private BinaryTree (Node<T> node)
+		private BinaryTree(Node node)
 		{
 			root = node;
 		}
 
-		public BinaryTree (T value)
+		public BinaryTree(T nodeValue)
 		{
-			root = new Node<T>(value);
+			root = new Node(nodeValue);
 		}
 
 		/// <summary>
@@ -60,8 +62,8 @@ namespace BinaryTree
 		/// <returns>The root value.</returns>
 		public T GetRootValue()
 		{
-			T value = root.value;
-			return value;
+			T nodeValue = root.nodeValue;
+			return nodeValue;
 		}
 
 		/// <summary>
@@ -74,6 +76,10 @@ namespace BinaryTree
 			return newTree;
 		}
 
+		/// <summary>
+		/// Clone the Tree.
+		/// </summary>
+		/// <param name="newTree">New tree.</param>
 		private void Clone(BinaryTree<T> newTree)
 		{
 			newTree.Add(this.GetRootValue());
@@ -87,19 +93,19 @@ namespace BinaryTree
 		/// Add the specified value.
 		/// </summary>
 		/// <param name="value">value.</param>
-		public void Add(T value)
+		public void Add(T nodeValue)
 		{
-			Add(ref root, value);
+			Add(ref root, nodeValue);
 		}
 
-		private static void Add(ref Node<T> root, T value)
+		private static void Add(ref Node root, T nodeValue)
 		{
 			if (root == null)
-				root = new Node<T> (value);
-			else if (value.CompareTo(root.value) < 0)
-				Add(ref root.lNode, value);
-			else if (value.CompareTo(root.value) > 0)
-				Add(ref root.rNode, value);
+				root = new Node (nodeValue);
+			else if (nodeValue.CompareTo(root.nodeValue) < 0)
+				Add(ref root.lNode, nodeValue);
+			else if (nodeValue.CompareTo(root.nodeValue) > 0)
+				Add(ref root.rNode, nodeValue);
 		}
 
 		/// <summary>
@@ -124,11 +130,11 @@ namespace BinaryTree
 		/// Gets the minimum node in right subtree.
 		/// </summary>
 		/// <returns>The minimum node.</returns>
-		private Node<T> GetMinNode()
+		private Node GetMinNode()
 		{
 			return GetMinNode(this.root.rNode);
 		}
-		private Node<T> GetMinNode(Node<T> node)
+		private Node GetMinNode(Node node)
 		{
 			if (node == null)
 				return null; 
@@ -138,30 +144,30 @@ namespace BinaryTree
 		}
 			
 		/// <summary>
-		/// Delete the specified value.
+		/// Delete the specified nodeValue.
 		/// </summary>
-		/// <param name="value">value.</param>
-		public void Delete(T value)
+		/// <param name="nodeValue">nodeValue.</param>
+		public void Delete(T nodeValue)
 		{
-			if (value.CompareTo(root.value) > 0)
+			if (nodeValue.CompareTo(root.nodeValue) > 0)
 			{
 				BinaryTree<T> rTree = GetRTree();
-				rTree.Delete(value);
+				rTree.Delete(nodeValue);
 				root.rNode = rTree.root;
 			}
-			else if (value.CompareTo(root.value) < 0)
+			else if (nodeValue.CompareTo(root.nodeValue) < 0)
 			{
 				BinaryTree<T> lTree = GetLTree();
-				lTree.Delete(value);
+				lTree.Delete(nodeValue);
 				root.lNode = lTree.root;
 			}
 			else
 			{
 				if (root.lNode != null && root.rNode != null)
 				{
-					root.value = GetMinNode().value;
+					root.nodeValue = GetMinNode().nodeValue;
 					BinaryTree<T> rTree = GetRTree();
-					rTree.Delete(root.value);
+					rTree.Delete(root.nodeValue);
 					root.rNode = rTree.root;
 				}
 				else if (root.rNode != null)
@@ -174,45 +180,105 @@ namespace BinaryTree
 					root = null;
 			}
 		}
-			
-		public List<T> ConvertToArray()
-		{
-			List<T> outputList = new List<T>();
-			var queue = new Queue<Node<T>>();
-			queue.Enqueue(root); 
-			while(queue.Count!=0)
-			{    
-				if (queue.Peek().lNode != null)
-					queue.Enqueue(queue.Peek().lNode);
-				if (queue.Peek().rNode != null)
-					queue.Enqueue(queue.Peek().rNode);
-				outputList.Add(queue.Dequeue().value);
-			}
-			return outputList;
-		} 
 
 		/// <summary>
-		/// Checking is value contains in tree
+		/// Checking is nodeValue contains in tree
 		/// </summary>
-		/// <returns><c>true</c> if  this instance is value in tree the specif ied value; otherwise, <c>false</c>.</returns>
-		/// <param name="value">value.</param>
-		public bool IsValueInTree(T value)
+		/// <returns><c>true</c> if  this instance is nodeValue in tree the specif ied nodeValue; otherwise, <c>false</c>.</returns>
+		/// <param name="nodeValue">nodeValue.</param>
+		public bool IsValueInTree(T nodeValue)
 		{
 			if (root == null)
 				return false;
 			else 
 			{
-				if  (value.CompareTo(root.value) > 0)
-					GetLTree().IsValueInTree(value);
-				else if  (value.CompareTo(root.value) < 0)
-					GetRTree().IsValueInTree(value);
+				if  (nodeValue.CompareTo(root.nodeValue) > 0)
+					GetLTree().IsValueInTree(nodeValue);
+				else if  (nodeValue.CompareTo(root.nodeValue) < 0)
+					GetRTree().IsValueInTree(nodeValue);
 				else
 					return true;
 			}
 			return false;
 		}
 
-		private Node<T> root;
+		public string ConvertToString()
+		{
+			string output = "";
+			foreach (T nodeValue in this)
+				output += nodeValue + " ";
+			return output;
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return (IEnumerator) GetEnumerator();
+		}
+
+		public IEnumerator<T> GetEnumerator()
+		{
+			return new BinaryTreeEnum(this);
+		}
+
+		private class BinaryTreeEnum : IEnumerator<T>
+		{
+
+			public BinaryTreeEnum(BinaryTree<T> binaryTree)
+			{
+				treeEnum = new List<T>();
+				this.ConvertToArray(binaryTree.root);
+			}
+
+			private void ConvertToArray(Node rootNode)
+			{
+				var queue = new Queue<Node>();
+				queue.Enqueue(rootNode); 
+				while (queue.Count != 0)
+				{    
+					if (queue.Peek().lNode != null)
+						queue.Enqueue(queue.Peek().lNode);
+					if (queue.Peek().rNode != null)
+						queue.Enqueue(queue.Peek().rNode);
+					treeEnum.Add(queue.Dequeue().nodeValue);
+				}
+			} 
+
+			public bool MoveNext()
+			{
+				position++;
+				return (position < treeEnum.Count);
+			}
+
+			public void Reset()
+			{
+				position = -1;
+			}
+
+			T IEnumerator<T>.Current
+			{
+				get
+				{
+					return treeEnum[position];
+				}
+			}
+
+			public object Current
+			{
+				get
+				{
+					return Current;
+				}
+			}
+
+			public void Dispose()
+			{
+			}
+
+			private IList<T> treeEnum;
+			private int position = -1;
+		}
+
+		private Node root;
 	}
 }
 

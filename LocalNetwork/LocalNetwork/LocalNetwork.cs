@@ -33,17 +33,26 @@ namespace LocalNetwork
 				adjacencyMatrix.Keys.Count, new ComputerComparer());
 			for (int i = 0; i < adjacencyMatrix.Count; i++) 
 			{
+				bool infected;
+				if (pcDescriptions[i][2] == "infected")
+					infected = true;
+				else
+					infected = false;
 				Computer currentComp = new Computer(int.Parse(pcDescriptions[i][0]),
 					pcDescriptions[i][1],
-					pcDescriptions[i][2],
+					infected,
 					double.Parse(pcDescriptions[i][3]));
 				IList<int> bufferList = adjacencyMatrix[i];
 				IList<Computer> compList = new List<Computer>();
 				for (int j = 0; j < adjacencyMatrix [i].Count; j++) 
 				{
+					if (pcDescriptions[bufferList[j]][2] == "infected")
+						infected = true;
+					else
+						infected = false;
 					Computer computer = new Computer(int.Parse(pcDescriptions[bufferList[j]][0]),
 						pcDescriptions[bufferList[j]][1],
-						pcDescriptions[bufferList[j]][2],
+						infected,
 						double.Parse(pcDescriptions[bufferList[j]][3]));
 					compList.Add(computer);
 				}
@@ -85,9 +94,14 @@ namespace LocalNetwork
 			Console.WriteLine("Network status after step # {0} : ", stepNumber);
 			foreach (Computer i in this.adjacencyList.Keys) 
 			{
+				string infected = "";
+				if (i.isInfected)
+					infected = "infected";
+				else
+					infected = "healthy";
 				Console.WriteLine("Computer with ID {0} is {1} now", 
 					i.computerID, 
-					i.isInfected);
+					infected);
 			}
 		}
 
@@ -99,7 +113,7 @@ namespace LocalNetwork
 		{
 			foreach (Computer i in adjacencyList.Keys) 
 			{
-				if (i.isInfected == "healthy" && adjacencyList[i].Any())
+				if (i.isInfected && adjacencyList[i].Any())
 					return true;
 			}
 			return false;
