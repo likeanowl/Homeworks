@@ -10,8 +10,9 @@ namespace Robots
 		/// <param name="args">The command-line arguments.</param>
 		public static void Main(string[] args)
 		{
-			RobotsGraph graph = InputParse.CreateObjectFromFile("FindCompTestFile.txt", 
-				"RobotsLocations.txt");
+			RobotsGraph graph = InputParse.CreateObjectFromFile("input.txt", 
+				"inputlocation.txt");
+			Console.WriteLine(graph.IsSequenceExist());
 		}
 	}
 }

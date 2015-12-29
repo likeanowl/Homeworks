@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="LocalNetwork/LocalNetwork.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="LocalNetwork/LocalNetwork.cs">
+    <Files>
+      <File FileName="LocalNetwork/ComputerComparer.cs" Line="1" Column="1" />
+      <File FileName="LocalNetwork/LocalNetwork.cs" Line="21" Column="27" />
+      <File FileName="LocalNetwork/Computer.cs" Line="29" Column="57" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
