@@ -90,6 +90,21 @@ namespace BinaryTree
 			string actual = binTree.ConvertToString();
 			Assert.AreEqual(excepted, actual);
 		}
+
+		[Test]
+		public void Foreach_test()
+		{
+			BinaryTree<int> binTree = new BinaryTree<int>();
+			binTree.Add(3);
+			binTree.Add(1);
+			binTree.Add(4);
+			int sum = 0;
+			foreach (int value in binTree)
+			{
+				sum += value;
+			}
+			Assert.AreEqual("8", sum.ToString());
+		}
 	}
 }
 

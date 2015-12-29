@@ -1,0 +1,5 @@
+/home/likeanowl/projects/Homeworks/BinaryTree/BinaryTree/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/likeanowl/projects/Homeworks/BinaryTree/BinaryTree/bin/Debug/BinaryTree.exe.mdb
+/home/likeanowl/projects/Homeworks/BinaryTree/BinaryTree/bin/Debug/BinaryTree.exe
+/home/likeanowl/projects/Homeworks/BinaryTree/BinaryTree/obj/x86/Debug/BinaryTree.exe
+/home/likeanowl/projects/Homeworks/BinaryTree/BinaryTree/obj/x86/Debug/BinaryTree.exe.mdb
