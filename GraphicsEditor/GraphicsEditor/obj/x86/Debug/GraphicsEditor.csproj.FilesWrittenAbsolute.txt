@@ -1,6 +1,0 @@
-/home/likeanowl/projects/Homeworks/GraphicsEditor/GraphicsEditor/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/home/likeanowl/projects/Homeworks/GraphicsEditor/GraphicsEditor/obj/x86/Debug/GraphicsEditor.gtk-gui.gui.stetic
-/home/likeanowl/projects/Homeworks/GraphicsEditor/GraphicsEditor/bin/Debug/GraphicsEditor.exe.mdb
-/home/likeanowl/projects/Homeworks/GraphicsEditor/GraphicsEditor/bin/Debug/GraphicsEditor.exe
-/home/likeanowl/projects/Homeworks/GraphicsEditor/GraphicsEditor/obj/x86/Debug/GraphicsEditor.exe
-/home/likeanowl/projects/Homeworks/GraphicsEditor/GraphicsEditor/obj/x86/Debug/GraphicsEditor.exe.mdb
