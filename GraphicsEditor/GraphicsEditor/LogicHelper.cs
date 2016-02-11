@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphicsEditor
 {
+    /// <summary>
+    /// Static class with some math stuff
+    /// </summary>
     static class LogicHelper
     {
         /// <summary>
@@ -27,8 +26,12 @@ namespace GraphicsEditor
         /// <returns></returns>
         public static double IntervalBetweenPointAndLine(Line line, System.Drawing.Point point)
         {
-            double x1 = line.GetXBegin(), x2 = line.GetXEnd(), y1 = line.GetYBegin(),
-                        y2 = line.GetYEnd(), x3 = point.X, y3 = point.Y;
+            double x1 = line.GetXBegin(), 
+                   x2 = line.GetXEnd(), 
+                   y1 = line.GetYBegin(),
+                   y2 = line.GetYEnd(), 
+                   x3 = point.X, 
+                   y3 = point.Y;
             double x4 = ((x2 - x1) * (y2 - y1) * ((x2 - x1) * (y2 - y1) * (y1 - y3) - 
                         Math.Pow(x2 - x1, 2) * x3 - Math.Pow(y2 - y1, 2) * x1)) /
                         ((-Math.Pow(x1 - x2, 2) - Math.Pow(y2 - y1, 2)) * (x2 - x1) *

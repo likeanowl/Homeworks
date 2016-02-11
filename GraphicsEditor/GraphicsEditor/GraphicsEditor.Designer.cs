@@ -1,6 +1,6 @@
 ﻿namespace GraphicsEditor
 {
-    partial class mainForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -58,7 +58,7 @@
             this.undoBtn.TabIndex = 1;
             this.undoBtn.Text = "Undo";
             this.undoBtn.UseVisualStyleBackColor = true;
-            this.undoBtn.Click += new System.EventHandler(BtnClick);
+            this.undoBtn.Click += new System.EventHandler(this.UndoBtnClick);
             // 
             // redoBtn
             // 
@@ -68,7 +68,7 @@
             this.redoBtn.TabIndex = 2;
             this.redoBtn.Text = "Redo";
             this.redoBtn.UseVisualStyleBackColor = true;
-            this.redoBtn.Click += new System.EventHandler(BtnClick);
+            this.redoBtn.Click += new System.EventHandler(this.RedoBtnClick);
             // 
             // drawBtn
             // 
@@ -78,7 +78,7 @@
             this.drawBtn.TabIndex = 3;
             this.drawBtn.Text = "Draw";
             this.drawBtn.UseVisualStyleBackColor = true;
-            this.drawBtn.Click += new System.EventHandler(BtnClick);
+            this.drawBtn.Click += new System.EventHandler(this.DrawBtnClick);
             // 
             // selectBtn
             // 
@@ -88,7 +88,7 @@
             this.selectBtn.TabIndex = 4;
             this.selectBtn.Text = "Select";
             this.selectBtn.UseVisualStyleBackColor = true;
-            this.selectBtn.Click += new System.EventHandler(BtnClick);
+            this.selectBtn.Click += new System.EventHandler(this.SelectBtnClick);
             // 
             // deleteBtn
             // 
@@ -98,7 +98,7 @@
             this.deleteBtn.TabIndex = 5;
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
-            this.deleteBtn.Click += new System.EventHandler(BtnClick);
+            this.deleteBtn.Click += new System.EventHandler(this.DeleteBtnClick);
             // 
             // mainForm
             // 
@@ -112,6 +112,7 @@
             this.Controls.Add(this.undoBtn);
             this.Controls.Add(this.drawingArea);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "mainForm";
             this.Text = "Graphics Editor";
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).EndInit();

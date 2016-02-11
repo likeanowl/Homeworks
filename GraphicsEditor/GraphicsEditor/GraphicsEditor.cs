@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GraphicsEditor
 {
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
-        public mainForm()
+        public MainForm()
         {
             InitializeComponent();
             lines = new Lines();
@@ -22,7 +16,7 @@ namespace GraphicsEditor
         {
             if (drawing)
             {
-                line = new Line(new Point(e.X, e.Y), new Point(e.X+3, e.Y+3));
+                line = new Line(new Point(e.X, e.Y), new Point(e.X + 3, e.Y + 3));
                 mouseDown = true;
                 undo.AddState(lines.GetState());
                 drawingArea.Invalidate();
@@ -68,6 +62,7 @@ namespace GraphicsEditor
             if (drawing)
             {
                 lines.AddLine(line);
+                redo = new UndoRedo();
             }
             if (changing && selected)
             {
@@ -137,48 +132,46 @@ namespace GraphicsEditor
             }
         }
 
-        public void BtnClick(object sender, EventArgs e)
+        public void UndoBtnClick(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            switch (btn.Text)
+            if (!undo.IsEmpty())
             {
-                case ("Undo"):
-                    if (!undo.IsEmpty())
-                    {
-                        selected = false;
-                        redo.AddState(lines.GetState());
-                        lines.SetState(undo.GetState());
-                        drawingArea.Invalidate();
-                    }
-                    break;
-                case ("Redo"):
-                    if (!redo.IsEmpty())
-                    {
-                        selected = false;
-                        undo.AddState(lines.GetState());
-                        lines.SetState(redo.GetState());
-                        drawingArea.Invalidate();
-                    }
-                    break;
-                case ("Draw"):
-                    drawing = true;
-                    changing = false;
-                    selected = false;
-                    break;
-                case ("Select"):
-                    drawing = false;
-                    changing = true;
-                    break;
-                case ("Delete"):
-                    undo.AddState(lines.GetState());
-                    if (selected)
-                    { 
-                        lines.DeleteLine(line);
-                    }
-                    selected = false;
-                    drawingArea.Invalidate();
-                    break;
+                selected = false;
+                redo.AddState(lines.GetState());
+                lines.SetState(undo.GetState());
+                drawingArea.Invalidate();
             }
+        }
+        public void RedoBtnClick(object sender, EventArgs e)
+        {
+            if (!redo.IsEmpty())
+            {
+                selected = false;
+                undo.AddState(lines.GetState());
+                lines.SetState(redo.GetState());
+                drawingArea.Invalidate();
+            }
+        }
+        public void DrawBtnClick(object sender, EventArgs e)
+        {
+            drawing = true;
+            changing = false;
+            selected = false;
+        }
+        public void SelectBtnClick(object sender, EventArgs e)
+        {
+            drawing = false;
+            changing = true;
+        }
+        public void DeleteBtnClick(object sender, EventArgs e)
+        {
+            undo.AddState(lines.GetState());
+            if (selected)
+            {
+                lines.DeleteLine(line);
+            }
+            selected = false;
+            drawingArea.Invalidate();
         }
 
         private bool lineEndDragging;
