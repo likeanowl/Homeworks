@@ -5,7 +5,7 @@ let rec dMult n =
     if n < 10 then n else (n % 10) * dMult (n / 10)
 
 /// Index in list
-let rec indVarInList list var =
+let indVarInList list var =
     let rec innerRec ls v ind =
         match ls with
         | [] -> -1
