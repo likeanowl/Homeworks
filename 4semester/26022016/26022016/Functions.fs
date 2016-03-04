@@ -17,7 +17,7 @@ let reverseList list =
     let rec recursiveReverse list tempList =
         match list with
         | [] -> tempList
-        | head :: tail -> recursiveReverse tail (head :: tempList)
+        | h :: t -> recursiveReverse t (h :: tempList)
     recursiveReverse list []
 
 /// Checking is string a palindrom
