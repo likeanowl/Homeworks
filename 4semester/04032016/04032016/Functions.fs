@@ -27,9 +27,9 @@ let evenNumbersCountFilter (list : list<'a>) =
 let evenNumbersCountFold (list : list<'a>) =
     List.fold (fun acc x -> acc + ((x + 1) % 2)) 0 list
 
-let isPrime n =
+let isPrime (n : int) =
     let rec check i =
-        i > n/2 || (n % i <> 0 && check (i + 1))
+        i > int (System.Math.Sqrt (float n)) + 1 || (n % i <> 0 && if i <> 2 then check (i + 2) else check (i + 1))
     check 2
 
 let primeNumbersSeq = 
@@ -44,8 +44,8 @@ let rec treeHeight tree =
 let rec eval exp = 
     match exp with
     | Number n -> n
-    | Add (x, y) -> eval x + eval y
-    | Multiply (x, y) -> eval x * eval y
-    | Divide (x, y) -> eval x / eval y
+    | Addition (x, y) -> eval x + eval y
+    | Multiplication (x, y) -> eval x * eval y
+    | Division (x, y) -> eval x / eval y
     | Mod (x, y) -> eval x % eval y
-    | Minus (x, y) -> eval x - eval y
+    | Subtraction (x, y) -> eval x - eval y
