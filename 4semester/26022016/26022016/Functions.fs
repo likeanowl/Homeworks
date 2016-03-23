@@ -23,12 +23,13 @@ let reverseList list =
 /// Checking is string a palindrom
 let pal str =
     let list = [for i in str -> i]
-    let rec innerRec list =
+    let rList = reverseList list
+    let rec innerRec list (rList : list<'a>) =
         match list with 
         | [] -> true
         | h :: [] -> true
-        | h :: t -> if h = (reverseList t).Head then innerRec (reverseList t).Tail else false
-    innerRec list
+        | h :: t -> if h =  rList.Head then innerRec list.Tail rList.Tail else false
+    innerRec list rList
 
 /// Cheking is all elemets are different
 let rec isAllDifferent list =
