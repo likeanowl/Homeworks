@@ -38,7 +38,7 @@ let primeNumbersSeq =
 
 let rec treeHeight tree =
     match tree with 
-    | Tree (_, l, r) -> 1 + treeHeight l + treeHeight r
+    | Tree (_, l, r) -> 1 + max (treeHeight r) (treeHeight l)
     | Tip _ -> 1
 
 let rec eval exp = 
