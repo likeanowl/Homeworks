@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="04032016/04032016.fsproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="04032016/Functions.fs">
+    <Files>
+      <File FileName="04032016/Functions.fs" Line="50" Column="18" />
+      <File FileName="04032016/Expression.fs" Line="1" Column="1" />
+      <File FileName="04032016/Tree.fs" Line="1" Column="1" />
+      <File FileName="04032016/AssemblyInfo.fs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
