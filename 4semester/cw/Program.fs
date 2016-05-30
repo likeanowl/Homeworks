@@ -1,5 +1,4 @@
-﻿module Functions
- 
+
  //1
 
 let listMin (list : List<'a>) =
