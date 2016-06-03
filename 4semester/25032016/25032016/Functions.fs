@@ -5,6 +5,7 @@ open System
 type RoundBuilder(accur : int) =
     member this.Bind(x : float, f : float -> float) = Math.Round(f x, accur)
     member this.Return(x : float) = x
+
 let parse str =
     let num = ref 0.0 
     let resOfParse = Double.TryParse(str, num)
