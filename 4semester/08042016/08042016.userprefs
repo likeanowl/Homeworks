@@ -1,10 +1,6 @@
-﻿<Properties StartupItem="06052016.fsproj">
+﻿<Properties StartupItem="08042016.fsproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Program.fs">
-    <Files>
-      <File FileName="Program.fs" Line="14" Column="31" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

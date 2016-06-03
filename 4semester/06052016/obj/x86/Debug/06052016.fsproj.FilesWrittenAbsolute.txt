@@ -1,0 +1,5 @@
+/home/likeanowl/Projects/homeworks/4semester/06052016/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.fs
+/home/likeanowl/Projects/homeworks/4semester/06052016/bin/Debug/06052016.exe.mdb
+/home/likeanowl/Projects/homeworks/4semester/06052016/bin/Debug/06052016.exe
+/home/likeanowl/Projects/homeworks/4semester/06052016/obj/x86/Debug/06052016.exe
+/home/likeanowl/Projects/homeworks/4semester/06052016/obj/x86/Debug/06052016.exe.mdb
