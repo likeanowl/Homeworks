@@ -2,8 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="LN/LocalNetwork.fs">
     <Files>
-      <File FileName="LN/Computer.fs" Line="1" Column="1" />
-      <File FileName="LN/LocalNetwork.fs" Line="6" Column="49" />
+      <File FileName="LN/Computer.fs" Line="11" Column="35" />
+      <File FileName="LN/LocalNetwork.fs" Line="27" Column="51" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
