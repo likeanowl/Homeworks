@@ -1,2 +1,2 @@
-# homeworks
+# assignments
 Some different stuff
