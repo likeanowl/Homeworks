@@ -21,9 +21,9 @@ function runmethod
     t = table(y2', u2', v2', 'VariableNames', {'y', 'u', 'v'});
     disp(t);
     [y1, u1, v1] = run01(A, B, a1, a2, b1, b2, p, q, f, h, 100);
-    y1 = y1(1:10:100);
-    u1 = u1(1:10:100);
-    v1 = v1(1:10:100);
+    y1 = y1(1: 10: 100);
+    u1 = u1(1: 10: 100);
+    v1 = v1(1: 10: 100);
     t1 = table(y1', u1', v1', 'VariableNames', {'y', 'u', 'v'});
     disp(t1);
     %test;

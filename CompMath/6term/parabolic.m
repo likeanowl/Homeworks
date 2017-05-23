@@ -1,49 +1,44 @@
-function main
+function parabolic
     format long;
-    %du/dt = d^2(u)/d(x^2) + f(x,t);
-    %[0,1]
-    sol = @(x,t) exp(-t/4)*cos(x/2) + x*(1 - x)/(10 + t);
-    f = @(x,t) (-x*(1 - x)/(10 + t).^2 + 2/(10 + t));
-    psi1 = @(t) exp(-t/4); %u(0,t)
-    psi2 = @(t) exp(-t/4)*cos(1/2); %u(1,t)
-    phi = @(x) cos(x/2) + x*(1 - x)/10;
+    sol = @(x,t) exp(-4*t)*sin(2 * x) + exp(-t) * (1 - x ^ 2);
+    f = @(x,t) exp(-t) * (x ^ 2 + 1);
+    psi1 = @(t) exp(-t); %u(0,t)
+    psi2 = @(t) exp(-4 * t) * sin(2); %u(1,t)
+    phi = @(x) sin(2 * x) + 1 - x ^ 2;
     n = 10;
     h = 1/n;    
     T = 10000;
-    [uimpl,limpl] = getsolImPlicitly(f,psi1,psi2,phi,n,T); 
-    [upl,lpl] = getsolPlicitly(f,psi1,psi2,phi,n,T); 
+    [uimpl, limpl] = getsolImPlicitly(f,psi1,psi2,phi,n,T); 
+    [upl, lpl] = getsolPlicitly(f,psi1,psi2,phi,n,T); 
     fprintf('n = %i, T = %i\n',n,T);
+    format long;
     for k = 1:T/10:T+1
         if k ~= 1
             k = k - 1;
         end
-        fprintf('\nСлой номер: %i\n',k);
+        fprintf('\nn: %i\n',k);
         for i = 1:1:n
-            fprintf('%f\t',upl(i,k));
+            fprintf('%.15f  ',upl(i,k));
         end
         fprintf('\n');
         for i = 1:1:n
-            fprintf('%f\t',uimpl(i,k));
+            fprintf('%.15f  ',uimpl(i,k));
         end       
-%         fprintf('\n');
-%         for i = 1:1:n
-%             fprintf('%f\t',sol((i-1)*h,(k - 1)*limpl));    
-%         end 
-    end
-    fprintf('\n');
-    for i = 1:1:n
-        fprintf('%Точное решение на последнем слое: f\t', sol((i - 1) * h, T * limpl));    
-    end     
+         fprintf('\n');
+         for i = 1:1:n
+             fprintf('%.15f  ',sol((i-1)*h,(k - 1)*limpl));    
+         end 
+    end  
 end
 
 function [u,l] = getsolPlicitly(f, psi1,psi2,phi,n,T) %l - step by time
-    h = 1/n;
-    l = h.^2/2;
+    h = 1 / n;
+    l = h .^ 2 / 2;
     for i =  1:n
         u(i,1) = phi((i - 1)*h);              
     end
     k = 1;
-    while(k <= T);     
+    while(k <= T)     
         u(1,k) = psi1((k - 1)*l);
         u(n+1,k) = psi2((k - 1)*l);   
         for i = 2:n
@@ -55,7 +50,7 @@ end
 
 function [y,l] = getsolImPlicitly(f, psi1,psi2,phi,n,T) %l - step by time
     h = 1/n;
-    l = h*h/2;
+    l = h * h/2;
     for i = 1:n
         y(i,1) = phi((i - 1)*h);              
     end
