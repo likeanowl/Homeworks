@@ -1,2 +1,2 @@
-# assignments
-Some different stuff
+# Assignments
+Homeworks, tasks, courses.
